@@ -112,11 +112,9 @@ Use the getInningScore() function below to do the following:
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
 function getInningScore(call) {
-  let home = call()
-  let away = call()
   let inn = {
-    Home: home,
-    Away: away,
+    Home: call(),
+    Away: call(),
   }
   return inn
   /*Your Code Here */
@@ -172,7 +170,6 @@ function scoreboard(call1, call2, inns) {
     totAway.push(call1(call2).Away)
   }
   const sum = (num1, num2) => num1 + num2;
-  // totHome.reduce(sum)
   let game = []
   for(let i = 0; i <inns; i++){
     game.push(`Inning ${i+1}: Away ${totAway[i]} - Home ${totHome[i]}`)
