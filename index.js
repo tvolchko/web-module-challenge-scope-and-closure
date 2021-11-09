@@ -161,25 +161,64 @@ Use the scoreboard function below to do the following:
   "This game will require extra innings: Away 10 - Home 10"
 ]  
   */
+// function scoreboard(call1, inningcb, number) {
+//   let homeScores = []
+//   const awayScores = []
+//   for(let i = 0; i < number; i++){
+//     homeScores.push(call1(inningcb).home)
+//     awayScores.push(call1(inningcb).away)
+//   }
+//   const inningStrings = [];
+//   const sum = (num1, num2) => { return num1 + num2 }
+//   for(let i = 0; i < number; i++){
+//     inningStrings.push(`Inning ${i + 1}: Away ${awayScores[i]} - Home: ${homeScores[i]}`);
+//   }
+//   if(homeScores.reduce(sum) === awayScores.reduce(sum)){
+//     inningStrings.push(`This game will require extra innings: Away ${awayScores[i]} - Home ${homeScores[i]}`)
+//   }
+//   return inningStrings;
+// }
 
+// console.log(scoreboard(getInningScore, inning, 9));
 function scoreboard(call1, call2, inns) {
-  let totHome = []
-  let totAway = []
-  for(let i = 0; i <inns; i++){
-    totHome.push(call1(call2).Home)
-    totAway.push(call1(call2).Away)
-  }
-  const sum = (num1, num2) => num1 + num2;
+  let totHome = 0
+  let totAway = 0
   let game = []
   for(let i = 0; i <inns; i++){
-    game.push(`Inning ${i+1}: Away ${totAway[i]} - Home ${totHome[i]}`)
+    let Score = call1(call2)
+    totHome += Score.Home
+    totAway += Score.Away
+    game.push(`Inning ${i+1}: Away ${Score.Away} - Home ${Score.Home}`)
   }
-  if(totHome.reduce(sum) === totAway.reduce(sum)){
-    game.push(`This game will require extra innings: Away ${totAway.reduce(sum)} - Home ${totHome.reduce(sum)}`)
+
+  if(totHome === totAway){
+    game.push(`This game will require extra innings: Away ${totAway} - Home ${totHome}`)
   }
  return game
   // /* CODE HERE */
 }
+// function scoreboard(call1, call2, inns) {
+//   let totHome = []
+//   let totAway = []
+//   for(let i = 0; i <inns; i++){
+//     totHome.push(call1(call2).Home)
+//     totAway.push(call1(call2).Away)
+//   }
+//   const sum = (num1, num2) => num1 + num2;
+//   let curHome = []
+//   let curAway = []
+//   let game = []
+//   for(let i = 0; i <inns; i++){
+//     curHome.push(totHome[i])
+//     curAway.push(totAway[i])
+//     game.push(`Inning ${i+1}: Away ${curAway.reduce(sum)} - Home ${curHome.reduce(sum)}`)
+//   }
+//   if(totHome.reduce(sum) === totAway.reduce(sum)){
+//     game.push(`This game will require extra innings: Away ${totAway.reduce(sum)} - Home ${totHome.reduce(sum)}`)
+//   }
+//  return game
+//   // /* CODE HERE */
+// }
 
 console.log(scoreboard(getInningScore, inning, 9))
 // console.log(scoreboard(getInningScore, inning, 9))
